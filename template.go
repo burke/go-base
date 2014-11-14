@@ -17,7 +17,6 @@ func main() {
 }
 
 func run() int {
-
 	go base.LogPanics(func() {
 		if err := dog.Gauge("widgets", 1, nil, 0.001); err != nil {
 			log.WithField("error", err).Warn("couldn't open UDP socket -- weird!")
