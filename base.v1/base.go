@@ -42,7 +42,7 @@ func SetupAirbrake() {
 	if key == "" {
 		missing = append(missing, AirbrakeAPIKey)
 	}
-	if key == "" {
+	if env == "" {
 		missing = append(missing, AirbrakeEnvironment)
 	}
 
