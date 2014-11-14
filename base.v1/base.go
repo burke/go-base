@@ -68,7 +68,8 @@ func StartPprofServer() {
 
 	go LogPanics(func() {
 		log.WithField("bind-addr", ep).Info("starting pprof server")
-		log.Error(http.ListenAndServe(ep, nil))
+		err := http.ListenAndServe(ep, nil)
+		log.WithField("error", err).Error("pprof HTTP server shut down")
 	})
 }
 
@@ -80,6 +81,6 @@ func SetupDatadog(namespace string, tags []string) {
 	}
 
 	if err := dog.Configure(ep, namespace, tags); err != nil {
-		panic(nil)
+		log.WithField("error", err).Error("failed to configure statsd/datadog")
 	}
 }
