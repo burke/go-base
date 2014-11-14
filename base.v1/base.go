@@ -66,10 +66,10 @@ func StartPprofServer() {
 		log.WithFields(log.Fields{"envvar": PprofEndpoint, "default": ep}).Warn("envvar not provided; using default value")
 	}
 
-	go func() {
+	go LogPanics(func() {
 		log.WithField("bind-addr", ep).Info("starting pprof server")
 		log.Error(http.ListenAndServe(ep, nil))
-	}()
+	})
 }
 
 func SetupDatadog(namespace string, tags []string) {
